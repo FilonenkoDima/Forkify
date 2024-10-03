@@ -6,9 +6,9 @@ import resultsView from "./views/resultsView.js";
 import "core-js/stable";
 import "regenerator-runtime";
 
-if (module.hot) {
-  module.hot.accept();
-}
+// if (module.hot) {
+//   module.hot.accept();
+// }
 
 const controlRecipe = async function () {
   try {
@@ -40,7 +40,8 @@ const controlSearchResults = async function () {
     await model.loadSearchResult(query);
 
     // 3) Render results
-    resultsView.render(model.state.search.results);
+    // resultsView.render(model.state.search.results);
+    resultsView.render(model.getSearchResultsPage(2));
   } catch (err) {
     console.log(err);
   }
