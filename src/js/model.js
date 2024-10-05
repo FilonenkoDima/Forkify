@@ -27,7 +27,6 @@ export const laodRecipe = async function (id) {
       cookingTime: recipe.cooking_time,
       ingredients: recipe.ingredients,
     };
-    console.log(state.recipe);
   } catch (err) {
     throw err;
   }
@@ -76,5 +75,5 @@ export const addBookmark = function (recipe) {
   state.bookmarks.push(recipe);
 
   // Mark current recipe as bookmark
-  if (recipe.id === state.recipe.id) state.recipe.bookmareked = true;
+  if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
 };
