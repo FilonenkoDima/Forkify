@@ -58,6 +58,10 @@
         $color-grad-2
       );
     }
+
+    @media only screen and (max-width: $bp-medium) {
+      width: 70%;
+    }
   }
 
   /////////////////////

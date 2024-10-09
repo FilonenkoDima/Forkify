@@ -27,6 +27,15 @@ const createRecipeObject = function (data) {
   };
 };
 
+/**
+ * Fetches recipe data from the API based on a given recipe ID.
+ *
+ * @async
+ * @function loadRecipe
+ * @param {string} id - The recipe ID used to fetch the data.
+ * @throws Will throw an error if the recipe cannot be fetched.
+ * @returns {Promise<void>} A promise that resolves when the recipe data is successfully loaded.
+ */
 export const laodRecipe = async function (id) {
   try {
     const data = await AJAX(`${API_URL}${id}?key=${KEY}`);
@@ -40,6 +49,15 @@ export const laodRecipe = async function (id) {
   }
 };
 
+/**
+ * Fetches a list of recipes based on a search query.
+ *
+ * @async
+ * @function searchRecipes
+ * @param {string} query - The search term to look for recipes.
+ * @throws Will throw an error if no recipes are found or there is an API issue.
+ * @returns {Promise<void>} A promise that resolves when the search results are successfully loaded.
+ */
 export const loadSearchResult = async function (query) {
   try {
     state.search.query = query;
@@ -70,6 +88,15 @@ export const getSearchResultsPage = function (page = state.search.page) {
   return state.search.results.slice(start, end);
 };
 
+/**
+ * Updates the number of servings for the currently loaded recipe.
+ *
+ * @function updateServings
+ * @param {number} newServings - The new number of servings to set.
+ * @throws Will throw an error if the new servings value is invalid.
+ * @returns {void}
+ */
+
 export const updateServings = function (newServings) {
   state.recipe.ingredients.forEach((ingredients) => {
     ingredients.quantity =
@@ -79,10 +106,24 @@ export const updateServings = function (newServings) {
   state.recipe.servings = newServings;
 };
 
+/**
+ * Saves the current list of bookmarked recipes to localStorage.
+ *
+ * @function persistBookmarks
+ * @returns {void}
+ */
 const persistBookmarks = function () {
   localStorage.setItem("bookmarks", JSON.stringify(state.bookmarks));
 };
 
+/**
+ * Adds a recipe to the list of bookmarks.
+ *
+ * @function addBookmark
+ * @param {Object} recipe - The recipe object to be bookmarked.
+ * @throws Will throw an error if the recipe is invalid or already bookmarked.
+ * @returns {void}
+ */
 export const addBookmark = function (recipe) {
   // Add bookmark
   state.bookmarks.push(recipe);
@@ -93,6 +134,14 @@ export const addBookmark = function (recipe) {
   persistBookmarks();
 };
 
+/**
+ * Removes a recipe from the list of bookmarks.
+ *
+ * @function deleteBookmark
+ * @param {string} id - The ID of the recipe to be removed from bookmarks.
+ * @throws Will throw an error if the recipe is not found in bookmarks.
+ * @returns {void}
+ */
 export const deleteBookmark = function (id) {
   // Delete bookmark
   const index = state.bookmarks.findIndex((el) => el.id === id);
